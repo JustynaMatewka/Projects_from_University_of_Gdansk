@@ -1,0 +1,23 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+{% block content %}
+
+{% for rent in rents %}
+
+<div>
+  <h1> Statystyki użytkownika: {{user.first_name}} {{user.last_name}}</h1>
+  {% if book.dostepne %}
+  <h4>Wypożyczone: </h4>
+    <li>Książka: {{ rent.depositet_book }}</li>
+    <li>Film: {{ rent.depositet_movie }}</li>
+    <li>Płyta: {{ rent.depositet_cd }}</li>  
+  <h4>Data wypożyczenia:  {{ rent.deposit_date }}</h4>
+  <h4>Data oddania: {{ rent.deposit_length }}</h4>
+  {% else %}
+    <h4>Brak wypożyczeń </h4>
+  {% endif %}
+</div>
+
+{% endfor %}
+{% endblock %}

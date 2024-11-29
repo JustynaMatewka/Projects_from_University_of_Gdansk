@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+
+
+{% for book in rental.book_set.all %}
+    <p>{{ book.tytul }}<p>
+        <li> Autor: {{ book.autor }} </li>
+        <li> Gatunek: {{ book.gatunek }} </li>
+        <li>ISBN:  {{ book.ISBN }}</li>
+        {% if book.dostepne %}
+            <a href="{% url 'rentals:borrow'%}" role="button" aria-pressed="true">Wypożycz</a>
+        {% endif %}
+{% endfor %}
+

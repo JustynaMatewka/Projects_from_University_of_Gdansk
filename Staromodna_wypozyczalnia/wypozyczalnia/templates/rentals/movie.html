@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+
+{% for movie in rental.movie_set.all %}
+    <p>{{ movie.tytul }}</p>
+        <li> Reżyser: {{ movie.rezyser }} </li>
+        <li> Gatunek: {{ movie.gatunek }} </li>
+        <li> Czas trwania: {{ movie.czas_trwania }}</li>
+        {% if movie.dostepne %}
+            <a href="{% url 'rentals:borrow'%}" role="button" aria-pressed="true">Wypożycz</a>
+        {% endif %}
+        {% endfor %}

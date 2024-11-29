@@ -1,0 +1,52 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+
+<legend><h2>{{ rental.nazwa }}</h2></legend>
+
+<p>Adres wypożyczalni: {{ rental.miasto }}, {{ rental.ulica }} {{ rental.nr_lokalu }}</p>
+
+<p></p>
+
+
+<h2>Książki</h2>
+{% for book in rental.book_set.all %}
+    <p>{{ book.tytul }}<p>
+        <li> Autor: {{ book.autor }} </li>
+        <li> Gatunek: {{ book.gatunek }} </li>
+        <li>ISBN:  {{ book.ISBN }}</li>
+        {% if book.dostepne %}
+            <a href="{% url 'rentals:borrow'%}" role="button" aria-pressed="true">Wypożycz</a>
+        {% endif %}
+{% endfor %}
+
+
+<p></p>
+
+
+<h2>Filmy</h2>
+{% for movie in rental.movie_set.all %}
+    <p>{{ movie.tytul }}</p>
+        <li> Reżyser: {{ movie.rezyser }} </li>
+        <li> Gatunek: {{ movie.gatunek }} </li>
+        <li> Czas trwania: {{ movie.czas_trwania }}</li>
+        {% if movie.dostepne %}
+            <a href="{% url 'rentals:borrow'%}" role="button" aria-pressed="true">Wypożycz</a>
+        {% endif %}
+{% endfor %}
+
+
+<p></p>
+
+
+<h2>CDs</h2>
+{% for cd in rental.cd_set.all %}
+    <p>{{ cd.tytul }}</p>
+        <li> Zespol: {{ cd.zespol }} </li>
+        <li> Gatunek: {{ cd.gatunek }} </li>
+        <li> Lista utworów: {{ cd.lista_utworow }} </li>
+        <li> Czas trwania: {{ cd.czas_trwania }}</li>
+        {% if cd.dostepne %}
+            <a href="{% url 'rentals:borrow'%}" role="button" aria-pressed="true">Wypożycz</a>
+        {% endif %}
+{% endfor %}

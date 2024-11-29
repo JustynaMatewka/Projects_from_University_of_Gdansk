@@ -1,0 +1,60 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+{% block content %}
+
+<div>
+
+{% block title %} - rezerwowanie noclegów {% endblock %}
+{% block content%}
+<center>
+<h2>Apartament: {{ apartment.name }} - rezerwowanie noclegów</h2>
+<p>
+<div style="margin-left:30%;margin-right:30%;">
+<fieldset>
+  <form method="post" action="/booking/{{ apartment.id }}?id={{id}}">{% csrf_token %}
+    <div style="text-align:left";>{{ form.as_p }}</div>
+    <input type="hidden" name="id" value="{{ apartment.id }}" />
+    <input type="submit" value="Rezerwacja"/>
+  </form>
+</fieldset>
+</div>
+{% endblock %}
+{% block footer %}
+<div style="text-align:center;"><a href="/">Główna strona</a>
+</div>
+{% endblock %}
+
+
+
+    <div>
+        <button type="submit">
+        <span></span> Gotowe
+        </button>
+        <a href="/rentals/">Cofnij</a>
+    </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div>
+        <label for="{{ field.id_for_label }}">{{ field.label}}</label>
+        {{ field|book.<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">dostepne:'false' }}
+        {% for error in field.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <div>
+        <button type="submit">
+        <span></span> Gotowe
+        </button>
+        <a href="/rentals/">Cofnij</a>
+    </div>
+    </form>
+</div>
+{% endblock %}

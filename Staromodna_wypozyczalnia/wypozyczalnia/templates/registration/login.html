@@ -1,0 +1,26 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'rentals/style.css' %}">
+
+{% block title %}  {% endblock %}
+{% block content%}
+<center>
+<h2>Logowanie na stronę Staromodnej wypożyczalni</h2>
+Logowanie jest wymagane, jeżeli chcesz wypożyczać zbiory.
+<p>
+<div style="margin-left:35%;margin-right:35%;">
+<fieldset>
+    <form method="post" action=".">{% csrf_token %}
+    <div style="text-align:left";>{{ form.as_p }}</div>
+    <input type="hidden" name="next" value="/rentals/" />
+    <input type="submit" value="Logowanie"/>    <input type="reset" value="Wartości domyślne"/>
+    </form>
+</fieldset>
+</div>
+</center>  
+{% endblock %}
+{% block footer %}
+<p>
+<div style="text-align:center;"><a href="/rentals/">Strona główna</a></div>
+</p>
+{% endblock %}
