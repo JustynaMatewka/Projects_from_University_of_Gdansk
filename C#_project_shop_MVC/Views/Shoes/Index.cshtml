@@ -1,0 +1,112 @@
+﻿@model project_shop_MVC.Models.GenreViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<form asp-controller="Shoes" asp-action="Index" method="get">
+    <p>
+        <select asp-for="ShoeMaterial" asp-items="Model.Materials">
+            <option value="">All</option>
+        </select>
+
+        Title: <input type="text" asp-for="SearchString" />
+
+        Price min: <input type="number" asp-for="MinPrice" />
+        Price max: <input type="number" asp-for="MaxPrice" />
+
+        Sale:   <input type="checkbox" asp-for="SearchSale" value="true" />
+
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div class="mt-5">
+    @if (Model.Shoe.Count() == 0)
+    {
+        <p class="text-center">No data to display</p>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var issue in Model.Shoe)
+            {
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @issue.Name
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @issue.Price
+                            </h5>
+                            <p class="card-text"> 
+                                @issue.Material
+                                <small>
+                                    <a asp-action="Details" asp-route-id="@issue.Id">Details</a>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            @issue.Sales.Description
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+
+
+
+@* 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shoe![0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shoe![0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shoe![0].Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Shoe!) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sales.Description)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@
+<p>
+    @Html.DisplayShoeMessage(Model.TotalShoes)
+</p>
+
+<p>
+    <a asp-action="Create">New Shoe</a>
+</p>
